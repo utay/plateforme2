@@ -11,12 +11,12 @@
 <script type="text/javascript">
 const count = document.getElementById('count');
 
-axios.get('http://localhost:8080', params).then(function(response) {
+axios.get('/api').then(function(response) {
   count.innerHTML = response.data.nb;
 });
 
 function increment() {
-  axios.get('http://localhost:8080/increment', params).then(function(response) {
+  axios.get('/api/increment').then(function(response) {
     count.innerHTML = parseInt(count.innerHTML, 10) + 1;
   });
 }

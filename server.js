@@ -18,7 +18,7 @@ async function getClicks() {
   return Clicks.findOne().exec();
 }
 
-app.get('/', async function(req, res) {
+app.get('/api', async function(req, res) {
   res.setHeader('Content-Type', 'application/json');
   const clicks = await getClicks();
   if (!clicks) {
@@ -28,7 +28,7 @@ app.get('/', async function(req, res) {
   }
 });
 
-app.get('/increment', async function(req, res) {
+app.get('/api/increment', async function(req, res) {
   const clicks = await getClicks();
   console.log(clicks)
   if (!clicks) {
