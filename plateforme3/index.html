@@ -11,12 +11,16 @@
 <script type="text/javascript">
 const count = document.getElementById('count');
 
-axios.get('https://14pvnqnla9.execute-api.eu-west-3.amazonaws.com/default/getClick').then(function(response) {
+axios.get('https://14pvnqnla9.execute-api.eu-west-3.amazonaws.com/default/getClick', {
+  withCredentials: false,
+}).then(function(response) {
   count.innerHTML = response.data.nb;
 });
 
 function increment() {
-  axios.get('https://14pvnqnla9.execute-api.eu-west-3.amazonaws.com/default/putClick').then(function(response) {
+  axios.get('https://14pvnqnla9.execute-api.eu-west-3.amazonaws.com/default/putClick', {
+    withCredentials: false,
+  }).then(function(response) {
     count.innerHTML = parseInt(count.innerHTML, 10) + 1;
   });
 }
