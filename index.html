@@ -1,4 +1,7 @@
 <html>
+  <head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  </head>
   <body class="center">
     <p>Count: <span id="count">0</span></p>
     <button onclick="increment()">Increment</button>
@@ -8,20 +11,12 @@
 <script type="text/javascript">
 const count = document.getElementById('count');
 
-const params = {
-  method: 'GET',
-  mode: 'cors',
-  cache: 'default'
-};
-
-fetch('http://localhost:8080', params).then(function(response) {
-  console.log(response);
+axios.get('http://localhost:8080', params).then(function(response) {
   count.innerHTML = response.data.nb;
 });
 
 function increment() {
-  fetch('http://localhost:8080/increment', params).then(function(response) {
-    console.log(response);
+  axios.get('http://localhost:8080/increment', params).then(function(response) {
     count.innerHTML = parseInt(count.innerHTML, 10) + 1;
   });
 }
