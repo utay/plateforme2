@@ -1,0 +1,40 @@
+<html>
+  <body class="center">
+    <p>Count: <span id="count">0</span></p>
+    <button onclick="increment()">Increment</button>
+  </body>
+</html>
+
+<script type="text/javascript">
+const count = document.getElementById('count');
+
+const params = {
+  method: 'GET',
+  mode: 'cors',
+  cache: 'default'
+};
+
+fetch('http://localhost:8080', params).then(function(response) {
+  console.log(response);
+  count.innerHTML = response.data.nb;
+});
+
+function increment() {
+  fetch('http://localhost:8080/increment', params).then(function(response) {
+    console.log(response);
+    count.innerHTML = parseInt(count.innerHTML, 10) + 1;
+  });
+}
+</script>
+
+<style>
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  margin-right: 10px;
+}
+</style>
