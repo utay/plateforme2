@@ -12,7 +12,6 @@
 const count = document.getElementById('count');
 
 axios.get('https://14pvnqnla9.execute-api.eu-west-3.amazonaws.com/default/getClick', {
-  headers: {'Access-Control-Allow-Origin': '*'},
   withCredentials: false,
 }).then(function(response) {
   count.innerHTML = response.data.nb;
@@ -20,7 +19,6 @@ axios.get('https://14pvnqnla9.execute-api.eu-west-3.amazonaws.com/default/getCli
 
 function increment() {
   axios.get('https://14pvnqnla9.execute-api.eu-west-3.amazonaws.com/default/putClick', {
-    headers: {'Access-Control-Allow-Origin': '*'},
     withCredentials: false,
   }).then(function(response) {
     count.innerHTML = parseInt(count.innerHTML, 10) + 1;
