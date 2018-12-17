@@ -1,0 +1,40 @@
+Resources:
+  ApplicationServerSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Opening up HTTP and SSH port.
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: '80'
+        ToPort: '80'
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: '22'
+        ToPort: '22'
+        CidrIp: 0.0.0.0/0
+  ApplicationServer1:
+    Type: AWS::EC2::Instance
+    Description: Launching Application Server 1.
+    Properties:
+      InstanceType: t2.micro
+      ImageId: ami-08182c55a1c188dee
+      KeyName: YGRLNeff
+      SecurityGroups:
+        - !Ref ApplicationServerSG
+      UserData: !Base64 |
+       #!/bin/bash
+       apt update -y
+       sudo su
+       apt install git -y
+       apt-get install apt-transport-https ca-certificates curl software-properties-common -y
+       curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+       apt-key fingerprint 0EBFCD88
+       add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+       apt-get update -y
+       apt-get install docker-ce -y
+       service docker start
+       curl -L "https://github.com/docker/compose/releases/download/1.23.1/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+       chmod +x /usr/local/bin/docker-compose
+       git clone  https://github.com/utay/plateforme2.git
+       cd plateforme2/
+       docker-compose up -d
