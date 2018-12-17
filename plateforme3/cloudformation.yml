@@ -142,13 +142,3 @@ Resources:
         WriteCapacityUnits: 5
       StreamSpecification:
         StreamViewType: NEW_IMAGE
-
-  S3Bucket:
-    Type: 'AWS::S3::Bucket'
-    Properties:
-      AccessControl: PublicRead
-      BucketName: PublicBucket
-      WebsiteConfiguration:
-        IndexDocument: index.html
-        ErrorDocument: error.html
-    DeletionPolicy: Retain
