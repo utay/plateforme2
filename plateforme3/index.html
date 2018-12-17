@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/axios/0.18.0/axios.min.js"></script>
+  </head>
+  <body class="center">
+    <p>Count: <span id="count">0</span></p>
+    <button onclick="increment()">Increment</button>
+  </body>
+</html>
+
+<script type="text/javascript">
+const count = document.getElementById('count');
+
+axios.get('https://14pvnqnla9.execute-api.eu-west-3.amazonaws.com/default/getClick').then(function(response) {
+  count.innerHTML = response.data.nb;
+});
+
+function increment() {
+  axios.get('https://14pvnqnla9.execute-api.eu-west-3.amazonaws.com/default/putClick').then(function(response) {
+    count.innerHTML = parseInt(count.innerHTML, 10) + 1;
+  });
+}
+</script>
+
+<style>
+.center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+p {
+  margin-right: 10px;
+}
+</style>
